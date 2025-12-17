@@ -1,4 +1,4 @@
-# 🎬 YT-DLP App (GUI)
+# 🎬 YT-DLP UserFriendly APP 
 
 Aplicação gráfica em Python para download de vídeos e playlists usando **yt-dlp**, com interface simples, escolha de formato, pasta de destino, progresso em tempo real e suporte a playlists.
 
@@ -72,7 +72,7 @@ Garanta que o node esteja acessível via terminal.
 
 ---
 
-##▶️Executando a aplicação
+## ▶️Executando a aplicação
 ```bash
 python gui_app.py
 ```
@@ -80,27 +80,34 @@ python gui_app.py
   
 ---
 
-##📁 Estrutura do projeto
+## 📁 Estrutura do projeto
 
-YT-DLP APP/
+YT-DLP APP
+/
 │
+
 ├── gui_app.py          # Interface gráfica (Tkinter)
+
 ├── cli_downloader.py   # Engine de download (yt-dlp via subprocess)
+
+├── test_cli.py   # Teste em modo terminal (CLI)
+
 ├── ffmpeg/
-│   └── bin/
-│       └── ffmpeg.exe
+
 ├── venv/
+
 └── README.md
+
 
 ---
 
-🛑 Cancelamento
+## 🛑 Cancelamento
 
 O botão Cancelar encerra o processo do yt-dlp com segurança, sem travar a interface.
 
 ---
 
-📦 Gerando executável (.exe)
+## 📦 Gerando executável (.exe)
 
 Instale o PyInstaller:
 ```bash
@@ -114,11 +121,11 @@ py -m PyInstaller ^
   --add-binary "ffmpeg/bin/ffmpeg.exe;ffmpeg/bin" ^
   gui_app.py
 ```
-Executável sera criado em dist/YTDLP-App.exe
+Executável sera criado em ```dist/YTDLP-App.exe```
 
 ---
 
-🚀 Roadmap (ideias futuras)
+## 🚀 Roadmap (ideias futuras)
 
 -📊 Progresso total da playlist
 
@@ -136,6 +143,6 @@ Executável sera criado em dist/YTDLP-App.exe
 
 ----
 
-##Desenvolvido por Zelo
+## Desenvolvido por Zelo
 
 
