@@ -41,11 +41,26 @@ class CLIDownloader:
             "merge": False,
             "postprocess": "mp3"
         },
+        "wav": {
+            "format": "ba",
+            "merge": False,
+            "postprocess": "wav"
+        },
         "low": {
             "format": "bv*[height<=480]+ba/b",
             "merge": True
         }
     }
+    DEFAULT_OPTIONS = {
+    "continue": True,
+    "no_overwrites": True,
+    "write_subs": False,
+    "write_auto_subs": False,
+    "keep_files": False,
+    "verbose": False,
+    "playlist": False
+    }
+
 
 
 
@@ -72,21 +87,25 @@ class CLIDownloader:
 
         return str(Path(base_path) / "ffmpeg" / "bin")
     
-    def download(self, url, profile="best", on_output=None, on_finish=None, on_error=None):
+    def download(self, url, profile="best", options=None,
+             on_output=None, on_finish=None, on_error=None):
 
         if self._is_running:
             return
+        
+        if options is None:
+            options = self.DEFAULT_OPTIONS.copy()
 
         self._is_running = True
 
         thread = threading.Thread(
             target=self._run,
-            args=(url, profile, on_output, on_finish, on_error),
+            args=(url, profile, options, on_output, on_finish, on_error),
             daemon=True
         )
         thread.start()
 
-    def _run(self, url, profile, on_output, on_finish, on_error):
+    def _run(self, url, profile, options, on_output, on_finish, on_error):
         
         profile_cfg = self.OUTPUT_PROFILES.get(profile)
         if not profile_cfg:
@@ -102,13 +121,45 @@ class CLIDownloader:
                 "--remote-components", "ejs:github",
                 "--ffmpeg-location", self.ffmpeg_path,
                 "-f", profile_cfg["format"],
-                "-o", os.path.join(self.output_dir, "%(title)s.%(ext)s"),
+                "-o", os.path.join(self.output_dir,
+                "%(title)s - %(artist,creator,uploader)s.%(ext)s"),
+                
                 url
             ]
+            # Opções adicionais
+            if options.get("continue"):
+                cmd.append("--continue")
+
+            if options.get("no_overwrites"):
+                cmd.append("--no-overwrites")
+
+            if options.get("write_subs"):
+                cmd.append("--write-subs")
+
+            if options.get("write_auto_subs"):
+                cmd.append("--write-auto-subs")
+
+            if options.get("keep_files"):
+                cmd.append("-k")
+
+            if options.get("verbose"):
+                cmd.append("--verbose")
+
+            if options.get("thumbnail"):
+                cmd.append("--embed-thumbnail")
+
+            if not options.get("playlist", True):
+                cmd.append("--no-playlist")
+
             if profile_cfg.get("postprocess") == "mp3":
                 cmd.extend([
                     "--extract-audio",
                     "--audio-format", "mp3"
+                ])
+            if profile_cfg.get("postprocess") == "wav":
+                cmd.extend([
+                    "--extract-audio",
+                    "--audio-format", "wav"
                 ])
             self.process = subprocess.Popen(
                 cmd,
