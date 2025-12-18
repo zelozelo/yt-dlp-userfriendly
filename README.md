@@ -1,4 +1,4 @@
-# 🎬 YT-DLP UserFriendly APP 
+# 🎬 YT-DLP UserFriendly APP
 
 Aplicação gráfica em Python para download de vídeos e playlists usando **yt-dlp**, com interface simples, escolha de formato, pasta de destino, progresso em tempo real e suporte a playlists.
 
@@ -8,23 +8,24 @@ O projeto foi desenvolvido para funcionar **sem privilégios de administrador**,
 
 ## ✨ Funcionalidades
 
-- 📥 Download de vídeos individuais ou playlists
-- 🎞 Escolha de formato de saída:
-  - Melhor qualidade
-  - MP4
-  - WEBM
-  - Somente áudio
-  - MP3
-  - Vídeo até 480p
-- 📁 Seleção da pasta de destino
-- 📊 Barra de progresso em tempo real
-- 📦 Suporte a playlists:
-  - Exibe **qual vídeo está sendo baixado** (ex: 3 de 12)
-  - Atualização automática a cada item
-- 🎵 Exibe o **nome do vídeo atual**
-- ⏹ Botão para **cancelar o download**
-- 🧵 Execução em thread (a interface não trava)
-- 📦 Preparado para empacotamento em `.exe` com PyInstaller
+-   📥 Download de vídeos individuais ou playlists
+-   🎞 Escolha de formato de saída:
+    -   Melhor qualidade
+    -   MP4
+    -   WEBM
+    -   Somente áudio
+    -   MP3
+    -   WAV
+    -   Vídeo até 480p
+-   📁 Seleção da pasta de destino
+-   📊 Barra de progresso em tempo real
+-   📦 Suporte a playlists:
+    -   Exibe **qual vídeo está sendo baixado** (ex: 3 de 12)
+    -   Atualização automática a cada item
+-   🎵 Exibe o **nome do vídeo atual**
+-   ⏹ Botão para **cancelar o download**
+-   🧵 Execução em thread (a interface não trava)
+-   📦 Preparado para empacotamento em `.exe` com PyInstaller
 
 ---
 
@@ -38,26 +39,25 @@ Playlist: vídeo 2 de 8
 [2/8] 45.3% | 3.2MiB/s | ETA 00:09
 Nome do vídeo atual
 
-
 ---
 
 ## 🧰 Tecnologias utilizadas
 
-- Python 3.10+
-- yt-dlp
-- ffmpeg
-- Tkinter
-- subprocess
-- threading
-- PyInstaller (opcional)
+-   Python 3.10+
+-   yt-dlp
+-   ffmpeg
+-   Tkinter
+-   subprocess
+-   threading
+-   PyInstaller (opcional)
 
 ---
 
 ## 📦 Requisitos
 
-- Python instalado (não requer privilégios de administrador)
-- Node.js acessível no PATH (necessário para desafios JS do YouTube)
-- ffmpeg portátil (binário)
+-   Python instalado (não requer privilégios de administrador)
+-   Node.js acessível no PATH (necessário para desafios JS do YouTube)
+-   ffmpeg portátil (binário)
 
 ---
 
@@ -68,16 +68,19 @@ python -m venv venv
 venv\Scripts\activate
 pip install yt-dlp
 ```
+
 Garanta que o node esteja acessível via terminal.
 
 ---
 
 ## ▶️Executando a aplicação
+
 ```bash
 python gui_app.py
 ```
-- também existe a opção de usar o ```run.cmd```
-  
+
+-   também existe a opção de usar o `run.cmd`
+
 ---
 
 ## 📁 Estrutura do projeto
@@ -86,18 +89,17 @@ YT-DLP APP
 /
 │
 
-├── gui_app.py          # Interface gráfica (Tkinter)
+├── gui_app.py # Interface gráfica (Tkinter)
 
-├── cli_downloader.py   # Engine de download (yt-dlp via subprocess)
+├── cli_downloader.py # Engine de download (yt-dlp via subprocess)
 
-├── test_cli.py   # Teste em modo terminal (CLI)
+├── test_cli.py # Teste em modo terminal (CLI)
 
 ├── ffmpeg/
 
 ├── venv/
 
 └── README.md
-
 
 ---
 
@@ -110,10 +112,13 @@ O botão Cancelar encerra o processo do yt-dlp com segurança, sem travar a inte
 ## 📦 Gerando executável (.exe)
 
 Instale o PyInstaller:
+
 ```bash
 pip install pyinstaller
 ```
+
 Gere o executável
+
 ```bash
 py -m PyInstaller ^
   --onefile ^
@@ -121,15 +126,26 @@ py -m PyInstaller ^
   --add-binary "ffmpeg/bin/ffmpeg.exe;ffmpeg/bin" ^
   gui_app.py
 ```
-Executável sera criado em ```dist/YTDLP-App.exe```
+
+Executável sera criado em `dist/YTDLP-App.exe`
 
 ---
+
+## ⚙️Configurações Avançadas
+
+Guia extra para configurações adicionais como:
+
+-   Continuar downloads
+-   Não sobrescrever arquivos
+-   Baixar legendas
+-   Legendas automáticas
+-   Manter arquivos temporários
+-   Baixar playlist inteira
+-   Adicionar a Thumbnail
 
 ## 🚀 Roadmap (ideias futuras)
 
 -📊 Progresso total da playlist
-
--⚙️Configurações Avançadas
 
 -📁 Lista visual dos vídeos da playlist
 
@@ -141,8 +157,6 @@ Executável sera criado em ```dist/YTDLP-App.exe```
 
 -🌍 Suporte a mais sites
 
-----
+---
 
 ## Desenvolvido por Zelo
-
-

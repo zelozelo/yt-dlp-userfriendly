@@ -68,8 +68,7 @@ class CLIDownloader:
         if output_dir is None:
             output_dir = os.path.join(
                 os.path.expanduser("~"),
-                "Downloads",
-                "yt-dlp"
+                "Downloads"
             )
 
         os.makedirs(output_dir, exist_ok=True)
